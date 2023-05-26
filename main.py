@@ -1,5 +1,6 @@
 import os
 import sys
+from functools import partial
 
 from PyQt6 import uic
 from PyQt6.QtCore import QEvent, QObject, Qt, QTimer, pyqtSignal
@@ -24,13 +25,23 @@ class ColorPicker(QMainWindow):
         super().__init__()
 
         self.main = uic.loadUi(os.path.join(os.path.dirname(__file__), "assets", "main.ui"), self)
-        self.cursorMove.connect(self.handleCursorMove)
+        self.cursorMove.connect(self.handle_cursor_move)
         self.timer = QTimer(self)
         self.timer.setInterval(50)
         self.timer.timeout.connect(self.poll_cursor)
         self.timer.start()
         self.cursor = None
         self.color = None
+        self.selected_color = None
+        self.button_list = [
+            self.css_selected_button,
+            self.hex_selected_button,
+            self.css_hover_button,
+            self.hex_hover_button,
+        ]
+        for button in self.button_list:
+            button.clicked.connect(partial(self.button_clicked, button))
+
         self.setWindowFlags(Qt.WindowType.WindowStaysOnTopHint)
         self.setWindowIcon(QIcon(os.path.join(os.path.dirname(__file__), "assets", "icon.png")))
 
@@ -47,15 +58,32 @@ class ColorPicker(QMainWindow):
             self.color = color
             self.cursorMove.emit(position)
 
-    def handleCursorMove(self, pos):
-        self.main.lineEdit.setText(f"R:{self.color.red()},G:{self.color.green()},B:{self.color.blue()}")
-        self.main.graphicsView_2.setStyleSheet(
+    def button_clicked(self, btn):
+        clipboard = QApplication.clipboard()
+        match btn.objectName():
+            case "css_hover_button":
+                clipboard.setText(f"color: rgb({self.color.red()},{self.color.green()},{self.color.blue()});")
+            case "hex_hover_button":
+                clipboard.setText(f"#{self.color.red():02X}{self.color.green():02X}{self.color.blue():02X}")
+            case "css_selected_button":
+                clipboard.setText(
+                    f"color: rgb({self.selected_color.red()},{self.selected_color.green()},{self.selected_color.blue()});",
+                )
+            case "hex_selected_button":
+                clipboard.setText(
+                    f"#{self.selected_color.red():02X}{self.selected_color.green():02X}{self.selected_color.blue():02X}",
+                )
+
+    def handle_cursor_move(self, pos):
+        self.main.hover_input.setText(f"R:{self.color.red()},G:{self.color.green()},B:{self.color.blue()}")
+        self.main.hover_box.setStyleSheet(
             f"background: rgb({self.color.red()},{self.color.green()},{self.color.blue()});",
         )
 
     def selectColor(self):
-        self.main.lineEdit_2.setText(f"R:{self.color.red()},G:{self.color.green()},B:{self.color.blue()}")
-        self.main.graphicsView.setStyleSheet(
+        self.selected_color = self.color
+        self.main.selected_input.setText(f"R:{self.color.red()},G:{self.color.green()},B:{self.color.blue()}")
+        self.main.selected_box.setStyleSheet(
             f"background: rgb({self.color.red()},{self.color.green()},{self.color.blue()});",
         )
 

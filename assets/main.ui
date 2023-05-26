@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Color Picker</class>
+ <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
@@ -15,14 +15,17 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_2"/>
+    <item row="1" column="1">
+     <widget class="QGraphicsView" name="hover_box"/>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit"/>
+     <widget class="QLineEdit" name="hover_input"/>
     </item>
     <item row="3" column="1">
-     <widget class="QGraphicsView" name="graphicsView"/>
+     <widget class="QGraphicsView" name="selected_box"/>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="selected_input"/>
     </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label_2">
@@ -31,15 +34,78 @@
       </property>
      </widget>
     </item>
+    <item row="3" column="0">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QPushButton" name="hex_selected_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>61</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="css_selected_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>61</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CSS</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QPushButton" name="hex_hover_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>61</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="css_hover_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>61</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CSS</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
        <string>Selected Color</string>
       </property>
      </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QGraphicsView" name="graphicsView_2"/>
     </item>
    </layout>
   </widget>
