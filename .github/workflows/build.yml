@@ -57,6 +57,9 @@ jobs:
           python-version: 3.11
       - name: Install Poetry Action
         uses: snok/install-poetry@v1.3.3
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
       - name: Install project dependencies
         run: |
           /Users/runner/.local/bin/poetry install
