@@ -4,7 +4,7 @@
 name = "altgraph"
 version = "0.17.3"
 description = "Python graph (network) package"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 files = [
@@ -109,7 +109,7 @@ i18n = ["Babel (>=2.7)"]
 name = "macholib"
 version = "1.16.2"
 description = "Mach-O header analysis and editing"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 files = [
@@ -220,7 +220,7 @@ files = [
 name = "pefile"
 version = "2023.2.7"
 description = "Python PE parsing module"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6.0"
 files = [
@@ -248,7 +248,7 @@ test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.3.1)", "pytest-
 name = "pyinstaller"
 version = "5.11.0"
 description = "PyInstaller bundles a Python application and all its dependencies into a single package."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "<3.12,>=3.7"
 files = [
@@ -282,7 +282,7 @@ hook-testing = ["execnet (>=1.5.0)", "psutil", "pytest (>=2.7.3)"]
 name = "pyinstaller-hooks-contrib"
 version = "2023.3"
 description = "Community maintained hooks for PyInstaller"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
@@ -313,16 +313,16 @@ PyQt6-sip = ">=13.4,<14"
 
 [[package]]
 name = "pyqt6-qt6"
-version = "6.5.0"
+version = "6.5.1"
 description = "The subset of a Qt installation needed by PyQt6."
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "PyQt6_Qt6-6.5.0-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:1178fcd5e9590fec4261e06a753a8fa028222ec0bd9a0788b3bd37720fbbe6cf"},
-    {file = "PyQt6_Qt6-6.5.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:9d82d8af986a0eef55905f309fdda4303d1354eba10175824ae62ab6547f7a96"},
-    {file = "PyQt6_Qt6-6.5.0-py3-none-manylinux_2_28_x86_64.whl", hash = "sha256:5f40ef19eb632731828283361f800928517650c74c914c093af9a364d6843953"},
-    {file = "PyQt6_Qt6-6.5.0-py3-none-win_amd64.whl", hash = "sha256:8c1f898f4d02a31615fe7613a38f82b489fb2c8554965c917d551470731635a8"},
+    {file = "PyQt6_Qt6-6.5.1-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:6aa88aaf4e4e9236364d5b4da8ffdf2854dc579966f135e85e34a54a91ec8096"},
+    {file = "PyQt6_Qt6-6.5.1-py3-none-macosx_11_0_arm64.whl", hash = "sha256:dfc06f8da1728fa2ee2a9407d85704e2661415536190ec632dd8f657acc53842"},
+    {file = "PyQt6_Qt6-6.5.1-py3-none-manylinux_2_28_x86_64.whl", hash = "sha256:7b04daf0e6ca1e79bf8d3e611392be06abc1687879e3475fcbad0d67672d3370"},
+    {file = "PyQt6_Qt6-6.5.1-py3-none-win_amd64.whl", hash = "sha256:fc4de9c51bfa3e8eaef03ecd4e6346f42a3accf69555987d66dd1236f14e8225"},
 ]
 
 [[package]]
@@ -355,7 +355,7 @@ files = [
 name = "pywin32-ctypes"
 version = "0.2.0"
 description = ""
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 files = [
@@ -409,7 +409,7 @@ files = [
 name = "setuptools"
 version = "67.8.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
@@ -425,4 +425,4 @@ testing-integration = ["build[virtualenv]", "filelock (>=3.4.0)", "jaraco.envs (
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "62afd219db85360475f65df3d0c607867f6b5ed08d27efd4a25533ab2ca9eed4"
+content-hash = "84ed2eaf9f051188135e4320fb025c92372222200ceef10c8132a94aa7e72d8a"

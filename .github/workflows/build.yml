@@ -62,7 +62,7 @@ jobs:
           virtualenvs-in-project: false
       - name: Install project dependencies
         run: |
-          /Users/runner/.local/bin/poetry install
+          /Users/runner/.local/bin/poetry install --with build
       - name: Build with pyinstaller for ${{matrix.TARGET}}
         run: ${{matrix.CMD_BUILD}}
       - name: Load Release URL File from release job
