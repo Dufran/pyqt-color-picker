@@ -22,3 +22,5 @@ run: ## Run code with python
 build: ## Build application 
 	pyinstaller --windowed --onefile --noconfirm --add-data "assets:assets" \
 	--icon="assets/icon.icns"  main.py
+build_lock:
+	poetry export --with  build -f requirements.txt >> requirements-build.txt
