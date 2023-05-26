@@ -48,7 +48,7 @@ jobs:
             CMD_BUILD: >
               pyinstaller -F -w --noconfirm  --add-data "assets:assets" -i "assets/icon.icns"  main.py &&
               cd dist/ &&
-              zip -r9 app_ubuntu main.app/
+              zip -r9 app_ubuntu . -i main/
             OUT_FILE_NAME: app_ubuntu.zip
             ASSET_MIME: application/zip
           - os: windows-latest
