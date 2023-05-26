@@ -60,7 +60,6 @@ jobs:
           curl -sSL https://install.python-poetry.org | python
       - name: Install project dependencies
         run: |
-          source $HOME/.poetry/env
           poetry install
       - name: Build with pyinstaller for ${{matrix.TARGET}}
         run: ${{matrix.CMD_BUILD}}
