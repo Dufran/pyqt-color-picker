@@ -39,14 +39,14 @@ jobs:
           - os: macos-latest
             TARGET: macos
             CMD_BUILD: >
-              /Users/runner/.local/bin/poetry run pyinstaller -F -w --noconfirm  --add-data "assets:assets" -i "assets/icon.icns"  main.py &&
+              pyinstaller -F -w --noconfirm  --add-data "assets:assets" -i "assets/icon.icns"  main.py &&
               cd dist/ &&
               zip -r9 main main.app/
             OUT_FILE_NAME: main.zip
             ASSET_MIME: application/zip
           - os: windows-latest
             TARGET: windows
-            CMD_BUILD: /Users/runner/.local/bin/poetry run pyinstaller -F -w --noconfirm  --add-data "assets:assets" -i "assets/icon.icns"  main.py
+            CMD_BUILD: pyinstaller -F -w --noconfirm  --add-data "assets:assets" -i "assets/icon.icns"  main.py
             OUT_FILE_NAME: main.exe
             ASSET_MIME: application/vnd.microsoft.portable-executable
     steps:
@@ -58,8 +58,8 @@ jobs:
       - name: Install Poetry Action
         uses: snok/install-poetry@v1.3.3
         with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
+          virtualenvs-create: false
+          virtualenvs-in-project: false
       - name: Install project dependencies
         run: |
           /Users/runner/.local/bin/poetry install
