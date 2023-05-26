@@ -51,3 +51,4 @@ Cons:
 - Need to use qt-designer for creation .ui file even for small apps
 - Don't have allot of plugins
 - Creating interfaces is slow, even with qt-designer
+
