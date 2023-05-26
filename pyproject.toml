@@ -10,9 +10,6 @@ PyQt6 = "^6.5.0"
 python = ">=3.11,<3.12"
 qt-material = "^2.14"
 
-[tool.poetry.group.build]
-optional = true
-
 [tool.poetry.group.build.dependencies]
 pyinstaller = "^5.11.0"
 
