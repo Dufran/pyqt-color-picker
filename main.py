@@ -1,5 +1,6 @@
 import os
 import sys
+from copy import deepcopy
 from functools import partial
 
 from PyQt6 import uic
@@ -31,28 +32,34 @@ class ColorPicker(QMainWindow):
         self.timer.timeout.connect(self.poll_cursor)
         self.timer.start()
         self.cursor = None
-        self.color = None
-        self.selected_color = None
+        self.color: QColor = None
+        self.selected_color: QColor = None
         self.button_list = [
             self.css_selected_button,
             self.hex_selected_button,
             self.css_hover_button,
             self.hex_hover_button,
         ]
+        # * Attach click methods to targeted buttons
         for button in self.button_list:
             button.clicked.connect(partial(self.button_clicked, button))
-
+        # * Set selected buttons as disabled
+        self.change_buttons_state([self.main.hex_selected_button, self.main.css_selected_button], False)
+        # * Change style of inputs
+        self.change_elements_style_property([self.main.hover_input, self.main.selected_input], "color", "white")
         self.setWindowFlags(Qt.WindowType.WindowStaysOnTopHint)
+
         self.setWindowIcon(QIcon(os.path.join(os.path.dirname(__file__), "assets", "icon.png")))
 
     def poll_cursor(self):
         screen = QApplication.primaryScreen()
         cursor = QCursor()
         position = cursor.pos()
+        if self.main.geometry().contains(position):
+            return
         x, y = position.x(), position.y()
         image = screen.grabWindow(0, x, y, 1, 1).toImage()
         color = QColor(image.pixel(0, 0))
-
         if position != self.cursor:
             self.cursor = position
             self.color = color
@@ -60,6 +67,7 @@ class ColorPicker(QMainWindow):
 
     def button_clicked(self, btn):
         clipboard = QApplication.clipboard()
+
         match btn.objectName():
             case "css_hover_button":
                 clipboard.setText(f"color: rgb({self.color.red()},{self.color.green()},{self.color.blue()});")
@@ -76,22 +84,43 @@ class ColorPicker(QMainWindow):
 
     def handle_cursor_move(self, pos):
         self.main.hover_input.setText(f"R:{self.color.red()},G:{self.color.green()},B:{self.color.blue()}")
-        self.main.hover_box.setStyleSheet(
-            f"background: rgb({self.color.red()},{self.color.green()},{self.color.blue()});",
+        self.change_elements_style_property(
+            [self.main.hover_box],
+            "background",
+            f"rgb({self.color.red()},{self.color.green()},{self.color.blue()})",
         )
 
     def selectColor(self):
-        self.selected_color = self.color
+        self.selected_color = deepcopy(self.color)
+        self.change_buttons_state([self.main.hex_selected_button, self.main.css_selected_button], True)
         self.main.selected_input.setText(f"R:{self.color.red()},G:{self.color.green()},B:{self.color.blue()}")
-        self.main.selected_box.setStyleSheet(
-            f"background: rgb({self.color.red()},{self.color.green()},{self.color.blue()});",
+        self.change_elements_style_property(
+            [self.main.selected_box],
+            "background",
+            f"rgb({self.color.red()},{self.color.green()},{self.color.blue()})",
         )
+
+    @staticmethod
+    def change_buttons_state(buttons, state):
+        """Helper method to change specific buttons to enable/disable
+
+        Args:
+            buttons (list): list of buttons
+            state (bool): True/False
+        """
+        [button.setEnabled(state) for button in buttons]
+
+    @staticmethod
+    def change_elements_style_property(elements, name, value):
+        """Helper method to change css element property"""
+        [element.setStyleSheet(f"{name}: {value};") for element in elements]
 
 
 if __name__ == "__main__":
     # Create the application object
     app = QApplication(sys.argv)
     apply_stylesheet(app, theme="dark_amber.xml")
+    # * Filter must be instantiated first then passed to installEventFilter method
     _filter = GlobalEventFilter()
     app.installEventFilter(_filter)
     # Create the main window

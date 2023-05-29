@@ -5,13 +5,13 @@ Simple pyqt6 app that works as color picker
 ## Goal
 
 - Create a app window with 2 fields
-  - Field 1: Color of pixel where cursor is located
+  - Field 1: Color of pixel where cursor is located (ignore pixel inside app window)
     - Pool color of pixel with signal
   - Field 2: Color of pixel where last click event happen
 - App should be always on top
 - Build app for multiple platforms
   - Add assets for customized build(icon)
-- Add buttons to copy color to clipboard as CSS color property and hex value
+- Add buttons to copy color to clipboard as CSS color property and HEX value of color
 
 ## Ui example
 
@@ -31,7 +31,7 @@ Still platform have some specific parameters:
     ```
 
 Build process is present in GA workflow `build.yml`
-it build executable for linux,mac, windows on each tag that match pattern "v\*"
+it build executable for linux,mac,windows on each tag that match pattern "v\*"
 
 ## Summary and comparison with electron
 
@@ -51,4 +51,3 @@ Cons:
 - Need to use qt-designer for creation .ui file even for small apps
 - Don't have allot of plugins
 - Creating interfaces is slow, even with qt-designer
-
