@@ -3,7 +3,7 @@ authors = ["Oleksandr Korol <oleksandr.korol@coaxsoft.com>"]
 description = ""
 name = "pyqt-color-picker"
 readme = "README.md"
-version = "0.1.0"
+version = "0.1.2"
 
 [tool.poetry.dependencies]
 PyQt6 = "^6.5.0"
