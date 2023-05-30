@@ -1,13 +1,13 @@
 # Color Picker
 
-Simple pyqt6 app that works as color picker
+Simple pyqt6 app that works as a color picker
 
 ## Goal
 
-- Create a app window with 2 fields
-  - Field 1: Color of pixel where cursor is located (ignore pixel inside app window)
+- Create an app window with 2 fields
+  - Field 1: Color of pixel where the cursor is located (ignore pixel inside app window)
     - Pool color of pixel with signal
-  - Field 2: Color of pixel where last click event happen
+  - Field 2: Color of pixel where last click event happens
 - App should be always on top
 - Build app for multiple platforms
   - Add assets for customized build(icon)
@@ -19,7 +19,7 @@ Simple pyqt6 app that works as color picker
 
 ## Packaging
 
-For creation of executable file we will use pyintaller. It allows to build executable app for multiple platforms.
+For the creation of executable file we will use pyintaller. It allows the building of executable apps for multiple platforms.
 Still platform have some specific parameters:
 
 - Add data path different on unix/windows
@@ -31,7 +31,7 @@ Still platform have some specific parameters:
     ```
 
 Build process is present in GA workflow `build.yml`
-it build executable for linux,mac,windows on each tag that match pattern "v\*"
+it build an executable for linux,mac,windows on each tag that match pattern "v\*"
 
 ## Summary and comparison with electron
 
@@ -39,9 +39,9 @@ Pros and cons when creating apps with pyqt6
 
 Pros:
 
-- Allow you to quickly create app using python
+- Allow you to quickly create an app using python
 - Full QT syntax
-- Easy way to build general multi platform apps
+- Easy way to build general multi-platform apps
 - Low memory usage
 
 Cons:
@@ -49,5 +49,5 @@ Cons:
 - In terms of program speed, Javascript under Electron is going to be faster than Python with Qt. Python has no JIT and it's often orders of magnitude slower than JS's V8 interpreter.
 - Qt quite hard to adopt
 - Need to use qt-designer for creation .ui file even for small apps
-- Don't have allot of plugins
+- Don't have a lot of plugins
 - Creating interfaces is slow, even with qt-designer

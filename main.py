@@ -9,6 +9,8 @@ from PyQt6.QtGui import QColor, QCursor, QIcon
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from qt_material import apply_stylesheet
 
+from ui import Ui_MainWindow
+
 
 class GlobalEventFilter(QObject):
     def eventFilter(self, obj, event):
@@ -24,8 +26,8 @@ class ColorPicker(QMainWindow):
 
     def __init__(self):
         super().__init__()
-
-        self.main = uic.loadUi(os.path.join(os.path.dirname(__file__), "assets", "main.ui"), self)
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
         self.cursorMove.connect(self.handle_cursor_move)
         self.timer = QTimer(self)
         self.timer.setInterval(50)
@@ -35,18 +37,18 @@ class ColorPicker(QMainWindow):
         self.color: QColor = None
         self.selected_color: QColor = None
         self.button_list = [
-            self.css_selected_button,
-            self.hex_selected_button,
-            self.css_hover_button,
-            self.hex_hover_button,
+            self.ui.css_selected_button,
+            self.ui.hex_selected_button,
+            self.ui.css_hover_button,
+            self.ui.hex_hover_button,
         ]
         # * Attach click methods to targeted buttons
         for button in self.button_list:
             button.clicked.connect(partial(self.button_clicked, button))
         # * Set selected buttons as disabled
-        self.change_buttons_state([self.main.hex_selected_button, self.main.css_selected_button], False)
+        self.change_buttons_state([self.ui.hex_selected_button, self.ui.css_selected_button], False)
         # * Change style of inputs
-        self.change_elements_style_property([self.main.hover_input, self.main.selected_input], "color", "white")
+        self.change_elements_style_property([self.ui.hover_input, self.ui.selected_input], "color", "white")
         self.setWindowFlags(Qt.WindowType.WindowStaysOnTopHint)
 
         self.setWindowIcon(QIcon(os.path.join(os.path.dirname(__file__), "assets", "icon.png")))
@@ -55,7 +57,7 @@ class ColorPicker(QMainWindow):
         screen = QApplication.primaryScreen()
         cursor = QCursor()
         position = cursor.pos()
-        if self.main.geometry().contains(position):
+        if self.geometry().contains(position):
             return
         x, y = position.x(), position.y()
         image = screen.grabWindow(0, x, y, 1, 1).toImage()
@@ -83,19 +85,19 @@ class ColorPicker(QMainWindow):
                 )
 
     def handle_cursor_move(self, pos):
-        self.main.hover_input.setText(f"R:{self.color.red()},G:{self.color.green()},B:{self.color.blue()}")
+        self.ui.hover_input.setText(f"R:{self.color.red()},G:{self.color.green()},B:{self.color.blue()}")
         self.change_elements_style_property(
-            [self.main.hover_box],
+            [self.ui.hover_box],
             "background",
             f"rgb({self.color.red()},{self.color.green()},{self.color.blue()})",
         )
 
     def selectColor(self):
         self.selected_color = deepcopy(self.color)
-        self.change_buttons_state([self.main.hex_selected_button, self.main.css_selected_button], True)
-        self.main.selected_input.setText(f"R:{self.color.red()},G:{self.color.green()},B:{self.color.blue()}")
+        self.change_buttons_state([self.ui.hex_selected_button, self.ui.css_selected_button], True)
+        self.ui.selected_input.setText(f"R:{self.color.red()},G:{self.color.green()},B:{self.color.blue()}")
         self.change_elements_style_property(
-            [self.main.selected_box],
+            [self.ui.selected_box],
             "background",
             f"rgb({self.color.red()},{self.color.green()},{self.color.blue()})",
         )
@@ -125,7 +127,7 @@ if __name__ == "__main__":
     app.installEventFilter(_filter)
     # Create the main window
     window = ColorPicker()
-    window.main.show()
+    window.show()
 
     # Run the event loop
     sys.exit(app.exec())

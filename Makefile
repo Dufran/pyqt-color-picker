@@ -24,3 +24,5 @@ build: ## Build application
 	--icon="assets/icon.icns"  main.py
 build_lock:
 	poetry export --with  build -f requirements.txt >> requirements-build.txt
+ui:
+	poetry run python -m PyQt6.uic.pyuic -o ui.py -x assets/main.ui
